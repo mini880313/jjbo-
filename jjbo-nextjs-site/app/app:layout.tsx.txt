@@ -1,0 +1,59 @@
+// app/layout.tsx
+import './globals.css';
+import Link from 'next/link';
+
+// 站點的 Metadata
+export const metadata = {
+  title: 'JJBO | 品牌顧問成效型數位廣告服務',
+  description: 'Business strategies driving data growth.',
+};
+
+// 導航列元件
+const Nav = () => (
+  <nav className="fixed top-0 left-0 right-0 z-10 bg-background-light/90 backdrop-blur-sm border-b border-text-dark/10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+      <Link href="/" className="text-xl font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">
+        JJBO
+      </Link>
+      <div className="flex space-x-6 text-sm font-medium">
+        <NavLink href="/services" label="服務項目" />
+        <NavLink href="/about" label="關於我們" />
+        <NavLink href="/contact" label="立即合作" className="text-accent-main border border-accent-main px-3 py-1 rounded hover:bg-accent-main hover:text-background-light transition-colors" />
+      </div>
+    </div>
+  </nav>
+);
+
+const NavLink = ({ href, label, className = '' }: { href: string; label: string; className?: string }) => (
+  <Link href={href} className={`hover:text-gray-500 transition-colors ${className}`}>
+    {label}
+  </Link>
+);
+
+// 頁腳元件
+const Footer = () => (
+  <footer className="py-8 border-t border-text-dark/10 mt-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+      <p>合作信箱：jjbo@jjbo.com.tw</p>
+      <p className="mt-2">© Copyright 2025. All rights reserved by JJBO.</p>
+    </div>
+  </footer>
+);
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="zh-TW">
+      <body>
+        <Nav />
+        <main className="pt-20 min-h-screen">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
